@@ -7,6 +7,7 @@ import CartShow from '../components/CartShow.vue';
 
   <CartShow />
 
+
 </template>
 
 <style>

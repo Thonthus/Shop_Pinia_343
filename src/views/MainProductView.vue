@@ -9,6 +9,7 @@ import ProductShow from '../components/ProductShow.vue';
 
 </template>
 
+
 <style>
 body{
   background-color: rgb(239, 243, 246);

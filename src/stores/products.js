@@ -11,7 +11,7 @@ export const useProductStore = defineStore({
         Des1 : 'สายเอ็นแบดมินตันผลิตจากวัสดุไฟเบอร์และไนล่อนโพลีเมอร์', 
         Des2 : 'YONEX Skyarc สายเอ็นแบดมินตันผลิตจากวัสดุไฟเบอร์และไนล่อนโพลีเมอร์ มีความเหนียวแข็งแรงและทนทานสูง สะดวกในการติดตั้งใช้งานง่าย', 
         Price : '฿320.00',
-        PriceCal : 320, 
+        PriceCal : 320.00, 
         img : "../Img/1Skyarc.png",
         quatity : 0 },
       { id : 2,
@@ -19,7 +19,7 @@ export const useProductStore = defineStore({
         Des1 : 'ออกแบบให้เหมาะสำหรับผู้เล่นที่ชอบไม้หัวเบา', 
         Des2 : 'ออกแบบให้เหมาะสำหรับผู้เล่นที่ชอบไม้หัวเบาที่สามารถสวิงไม้ได้อย่างรวดเร็ว พร้อมด้ามจับถนัดมือให้คุณควบคุมไม้และลูกตบได้อย่างมั่นใจ', 
         Price : '฿690.00',
-        PriceCal : 690, 
+        PriceCal : 690.00, 
         img : '../Img/2YONEXNanoflare100.png',
         quatity : 0 },
       { id : 3,
@@ -27,7 +27,7 @@ export const useProductStore = defineStore({
         Des1 : 'ลูกขนไก่ YONEX ผลิตจากวัสดุคุณภาพดี', 
         Des2 : 'ลูกขนไก่ YONEX รุ่น Aerosensa10 (AS-10) ผลิตจากวัสดุคุณภาพดี สปริงตัวตอบสนองต่อแรงตีได้อย่างดี สามารถใช้ได้ทั้งผู้เล่นระดับเริ่มต้นไปจนถึงมืออาชีพ', 
         Price : '฿750.00',
-        PriceCal : 750, 
+        PriceCal : 750.00, 
         img : '../Img/3Aerosensa10.png',
         quatity : 0 },
       { id : 4,
@@ -35,7 +35,7 @@ export const useProductStore = defineStore({
         Des1 : 'โดดเด่นดีไซน์เฉียบบางที่สุดที่เคยผลิตโดย YONEX', 
         Des2 : 'ไม้แบดมินตัน YONEX Nanoflare Feel โดดเด่นดีไซน์เฉียบบางที่สุดที่เคยผลิตโดย YONEX ช่วยลดแรงต้านของอากาศในขณะที่มอบความรู้สึกในการตี เฟรม AERO เพื่อความโค้งมนทั่วทั้งหัวไม้ ลดการต้านลมและเพิ่มความเร็วไม้ มาพร้อมเทคโนโลยี ISOMETRICTM ขยายจุด Sweet spot ให้ใหญ่ขึ้นโดยการปรับจุดตัดของสายหลักและสายไขว้ให้เหมาะสม', 
         Price : '฿1,680.00', 
-        PriceCal : 1680,
+        PriceCal : 1680.00,
         img : '../Img/4YONEXNanoflareFeel.png',
         quatity : 0 },
       { id : 5,
@@ -75,7 +75,7 @@ export const useProductStore = defineStore({
         Des1 : 'น้ำหนักเบาเพียง 83 กรัม', 
         Des2 : 'กรอบไม้ : แกรไฟต์ HM / Pocketing Booster ก้านไม้ : แกรไฟต์ HM / SUPER HMG / ULTRA PE FIBER น้ำหนัก / ด้ามจับ : 4U (ประมาณ 83 กรัม) G5, 6 / 3U (ประมาณ 88 กรัม)', 
         Price : '฿5,455.00', 
-        PriceCal : 5545.00, 
+        PriceCal : 5455.00, 
         img : '../Img/9YONEXArcsaber11Pro.png',
         quatity : 0 },
       { id : 10,
@@ -108,17 +108,20 @@ export const useProductStore = defineStore({
     },
     addToCart(productData) {
       const existingProduct = this.CartList.find((product) => product.id === productData.id);
-
       if (existingProduct) {
         if (productData.quatity > 0) {
           existingProduct.quatity += productData.quatity;
           existingProduct.totalProductPrice = existingProduct.quatity * existingProduct.PriceCal;
+          alert(`เพิ่ม ${productData.Name} เข้าตะกร้าแล้ว! \ud83d\ude01 `);
+
         }
       } else {
         if (productData.quatity > 0) {
           const newProduct = { ...productData };
           newProduct.totalProductPrice = newProduct.quatity * newProduct.PriceCal;
           this.CartList.push(newProduct);
+          alert(`เพิ่ม ${productData.Name} เข้าตะกร้าแล้ว! \ud83d\ude01`);
+
         }
       }
 
@@ -127,8 +130,9 @@ export const useProductStore = defineStore({
         this.productsList[productIndex].quatity = 0;
       }
   
-     
+      
       this.updateTotalOverallPrice();
+      
     },
 
     updateTotalOverallPrice() {

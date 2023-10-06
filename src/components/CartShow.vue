@@ -2,12 +2,14 @@
 import { ref } from 'vue';
 import  { useProductStore } from '@/stores/products'
 import { computed, watchEffect } from 'vue'
+import { RouterLink } from 'vue-router';
 
 const name = ref('');
 const address = ref('');
 const phoneNumber = ref('');
 
 const storeProduct = useProductStore()
+
 
 function formatNumberWithCommas(number) {
     const formattedNumber = Number(number).toFixed(2);
@@ -37,10 +39,8 @@ const placeOrder = () => {
     address: address.value,
     phoneNumber: phoneNumber.value,
   };
-
+  alert("สั่งซื้อสำเร็จ! ตรวจสอบรายละเอียดการสั่งซื้อได้ที่ รายการสั่งซื้อ \uD83D\uDE0E \uD83D\uDE0E");
   storeProduct.addOrder(orderData);
-
-
 };
 
 </script>
@@ -59,7 +59,7 @@ const placeOrder = () => {
                     </h4>
                     <RouterLink to="/" style="text-decoration: none;">
                         <div class="panelbuttcon">
-                            <button type="button" class="btn btn-secondary" style="margin: auto; margin-bottom: 1%; width: 100%;">เลือกสินค้าเลย ! กดที่นี่</button>
+                                <button type="button" class="btn btn-secondary" style="margin: auto; margin-bottom: 1%; width: 100%;">เลือกสินค้าเลย ! กดที่นี่</button>
                         </div>
                     </RouterLink>
                 </div>
@@ -142,10 +142,10 @@ const placeOrder = () => {
                     
                 </div>
                 <div class="detailbill">
-                    <p>รวม : {{ formatNumberWithCommas(totalOverallPrice) }}.00 บาท</p>
+                    <p>รวม : {{ formatNumberWithCommas(totalOverallPrice) }} บาท</p>
                     <hr>
                     <p>รายละเอียดการสั่งซื้อ</p>
-                    <form action="">
+                    <form action="" @submit.prevent="placeOrder">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">ชื่อผู้รับ</span>
                             <input id="name" type="text" v-model="name" class="form-control" placeholder="ชื่อผู้รับ" aria-label="Username" aria-describedby="basic-addon1" required="">
@@ -159,7 +159,7 @@ const placeOrder = () => {
                             <input id="num" class="form-control" v-model="phoneNumber" type="text" pattern="[0-9]{10}" maxlength="10" placeholder="กรอกเบอร์โทรศัพท์(10หลัก)" aria-label="tel" aria-describedby="basic-addon1" required="">
                         </div>
                         <div class="panelbuttcon">
-                            <button type="submit" class="btn btn-success" style="margin: auto; margin-bottom: 1%;" @click="placeOrder">ยืนยันการสั่งซื้อ</button>
+                                <input type="submit" class="btn btn-success" style="margin: auto; margin-bottom: 1%;" value="ยืนยันการสั่งซื้อ" >
                         </div>
                     </form>
                     
@@ -167,6 +167,9 @@ const placeOrder = () => {
             </div>
         </div>
     </div>
+
+    
+
 </template>
 
 

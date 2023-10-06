@@ -2,6 +2,7 @@
 import { useRoute } from 'vue-router';
 import { useProductStore } from '@/stores/products';
 import { computed } from 'vue'; 
+import { RouterLink } from 'vue-router';
 
 
 
@@ -57,6 +58,10 @@ const addToCart = () => {
           </div>
         </div>
       </div>
+
+
+
+      
   </template>
 
   <style scoped>

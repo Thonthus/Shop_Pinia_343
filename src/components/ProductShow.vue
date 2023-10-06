@@ -79,6 +79,7 @@ const addToCart = (productData) => {
       </div>
     </div>
 
+
 </template>
 
 
