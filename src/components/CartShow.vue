@@ -30,18 +30,27 @@ const removeFromCart = (productId) => {
   storeProduct.removeFromCart(productId);
 };
 
+
 const placeOrder = () => {
-  const orderData = {
-    orderNumber: storeProduct.OrderList.length + 1,
-    CartList: storeProduct.CartList,
-    Total : storeProduct.totalOverallPrice,
-    name: name.value,
-    address: address.value,
-    phoneNumber: phoneNumber.value,
-  };
-  alert("สั่งซื้อสำเร็จ! ตรวจสอบรายละเอียดการสั่งซื้อได้ที่ รายการสั่งซื้อ \uD83D\uDE0E \uD83D\uDE0E");
-  storeProduct.addOrder(orderData);
-};
+    const hasInvalidQuantity = storeProduct.CartList.some(product => product.quatity <= 0);
+
+    if (hasInvalidQuantity) {
+        alert("จำนวนสินค้าต้องมากกว่า 0");
+    } else {
+        const orderData = {
+            orderNumber: storeProduct.OrderList.length + 1,
+            CartList: storeProduct.CartList,
+            Total: storeProduct.totalOverallPrice,
+            name: name.value,
+            address: address.value,
+            phoneNumber: phoneNumber.value,
+        };
+        alert("สั่งซื้อสำเร็จ! ตรวจสอบรายละเอียดการสั่งซื้อได้ที่ รายการสั่งซื้อ \uD83D\uDE0E \uD83D\uDE0E");
+        storeProduct.addOrder(orderData);
+    }
+}
+
+  
 
 </script>
 
@@ -108,7 +117,7 @@ const placeOrder = () => {
                                         <img class="imgbutt" src="@/assets/minus.png" alt="minus">
                                     </button>
                                     </span>
-                                    <input class="form-control no-spinners" type="number" v-model="productData.quatity" style="text-align: center; font-weight: bold; " min="0">
+                                    <input class="form-control no-spinners" type="number" min="0" v-model="productData.quatity" style="text-align: center; font-weight: bold; " >
                                     <span class="input-group-text quatitybuttbgplus">
                                     <button class="quatitybutt" @click="storeProduct.incrementQuantity(productData)">
                                         <img class="imgbutt" src="@/assets/plus.png" alt="minus">
